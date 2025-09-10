@@ -1,0 +1,418 @@
+:root {
+  --bg: #fff5f7;
+  --bg-soft: #ffffff;
+  --text: #4a2e39;
+  --muted: #a27785;
+  --accent: #e9a3b4;
+  --accent-2: #f7cad0;
+  --radius: 20px;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --fade-ms: 500ms;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+    "Segoe UI Emoji";
+  background: radial-gradient(
+      1000px 600px at 70% 10%,
+      rgba(155, 141, 242, 0.12),
+      transparent
+    ),
+    radial-gradient(
+      900px 700px at 20% 90%,
+      rgba(111, 199, 184, 0.12),
+      transparent
+    ),
+    var(--bg);
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+}
+
+/* Dark Mode */
+body.dark {
+  --bg: #0c0b11;
+  --bg-soft: #16131c;
+  --text: #e6e0f5;
+  --muted: #a18fbf;
+  --accent: #c09bf0;
+  --accent-2: #7d5fbf;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* App Shell */
+.app {
+  width: min(980px, 92vw);
+  padding: clamp(16px, 3.2vw, 28px);
+  border-radius: var(--radius);
+  background: color-mix(in oklab, var(--bg-soft) 85%, transparent);
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Pondering the orb */
+.lotus-orb {
+  position: absolute;
+  inset: -20% auto auto -10%;
+  width: 420px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(155, 141, 242, 0.28),
+    rgba(155, 141, 242, 0) 60%
+  );
+  filter: blur(20px);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: -1;
+  animation: float 14s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0);
+  }
+  50% {
+    transform: translateY(14px) translateX(6px);
+  }
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--bg);
+  background: conic-gradient(
+    from 200deg at 50% 50%,
+    var(--accent),
+    var(--accent-2)
+  );
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  font-weight: 800;
+}
+
+.title {
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-ghost {
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--muted) 30%, transparent);
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.btn-ghost:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+main {
+  margin-top: 8px;
+}
+
+/* Intro message */
+.intro {
+  font-size: clamp(18px, 2.2vw, 22px);
+  line-height: 1.6;
+  text-align: center;
+  color: var(--muted);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity var(--fade-ms) ease, transform var(--fade-ms) ease;
+  max-width: 70ch;
+  margin: 6vh auto 0;
+}
+
+.intro.show {
+  opacity: 1;
+  transform: none;
+}
+
+.intro.hide {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+.skip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px auto 0;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in oklab, var(--muted) 30%, transparent);
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.prompt {
+  display: grid;
+  gap: 18px;
+  place-items: center;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity var(--fade-ms) ease, transform var(--fade-ms) ease;
+}
+
+.prompt.show {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.question {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  width: 100%;
+  max-width: 860px;
+}
+
+.choice {
+  border: 1px solid color-mix(in oklab, var(--muted) 24%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--bg-soft) 85%, transparent),
+    color-mix(in oklab, var(--bg-soft) 92%, transparent)
+  );
+  border-radius: 16px;
+  padding: 14px 16px;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+  isolation: isolate;
+  transition: transform 0.12s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.choice:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in oklab, var(--accent) 38%, transparent);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+}
+
+.choice .label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.choice .hint {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.quote-card {
+  display: grid;
+  gap: 14px;
+  margin-top: 8px;
+  padding: clamp(16px, 2.4vw, 22px);
+  border-radius: 16px;
+  background: var(--bg-soft);
+  border: 1px solid color-mix(in oklab, var(--muted) 22%, transparent);
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity var(--fade-ms) ease, transform var(--fade-ms) ease;
+}
+
+.quote-card.show {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+blockquote {
+  margin: 0;
+  font-size: clamp(18px, 2.2vw, 22px);
+  line-height: 1.6;
+}
+
+.source {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--accent) 92%, white 0%),
+    color-mix(in oklab, var(--accent) 76%, black 0%)
+  );
+  color: white;
+}
+
+.btn.muted {
+  background: color-mix(in oklab, var(--bg) 88%, var(--muted) 12%);
+  color: var(--text);
+  box-shadow: none;
+  border: 1px solid color-mix(in oklab, var(--muted) 24%, transparent);
+}
+
+.reflect {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .intro,
+  .prompt,
+  .quote-card {
+    transition: none;
+  }
+
+  .lotus-orb {
+    animation: none;
+  }
+}
+
+.card {
+  background: var(--bg-soft);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin: 1rem auto;
+  max-width: 600px;
+  transition: background var(--fade-ms), box-shadow var(--fade-ms);
+}
+
+button {
+  background: var(--accent);
+  color: var(--text);
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background var(--fade-ms), transform 0.2s;
+}
+
+button:hover {
+  background: var(--accent-2);
+  transform: translateY(-2px);
+}
+
+/* Dark mode animation */
+.shooting-star {
+  position: fixed;
+  width: 3px;
+  height: 3px;
+  background: white;
+  box-shadow: 0 0 6px 2px white;
+  border-radius: 50%;
+  transform: rotate(45deg);
+  animation: shoot 1s ease-out forwards;
+  z-index: 9999;
+}
+
+@keyframes shoot {
+  0% {
+    transform: translate(0, 0) rotate(45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--xTravel, 300px), var(--yTravel, 150px))
+      rotate(45deg);
+    opacity: 0;
+  }
+}
+
+/* Light mode animation */
+.sunburst {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, #e2b451 40%, transparent 70%);
+  animation: sunburst 0.8s ease-out forwards;
+  opacity: 0.7;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+@keyframes sunburst {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+  }
+}

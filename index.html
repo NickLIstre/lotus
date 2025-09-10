@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lotus</title>
+  <meta name="description" content="Lotus - daily guidance" />
+  <link rel="icon" href="data:," />
+  <link rel = "stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app" role="application" aria-label="Lotus — daily guidance">
+    <div class="lotus-orb" aria-hidden="true"></div>
+    <header>
+      <div class="brand" aria-label="Lotus brand">
+        <div class="logo" aria-hidden="true">✿</div>
+        <div class="title">Lotus</div>
+      </div>
+      <div class="controls">
+        <button class="btn-ghost" id="skipIntro" aria-label="Skip intro">Skip intro</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- Intro message -->
+      <p class="intro" id="introMsg">
+        “Everyone travels their own path. Finding one thing you can improve on each day, even slightly, will help pave your path and help you reach your goals.”
+      </p>
+
+      <!-- Prompt & choices -->
+      <section class="prompt" id="prompt" aria-live="polite" aria-atomic="true">
+        <h1 class="question">What are you working on today?</h1>
+        <div class="choices" role="list">
+          <button class="choice" data-key="focus" role="listitem">
+            <div class="label">🌱 Focus & Productivity</div>
+            <div class="hint">Reduce noise, finish one meaningful task.</div>
+          </button>
+          <button class="choice" data-key="learning" role="listitem">
+            <div class="label">📚 Learning & Study</div>
+            <div class="hint">Small steps, deep understanding.</div>
+          </button>
+          <button class="choice" data-key="mindfulness" role="listitem">
+            <div class="label">🧘 Peace & Calm</div>
+            <div class="hint">Breathe, relax.</div>
+          </button>
+          <button class="choice" data-key="health" role="listitem">
+            <div class="label">💪 Health & Discipline</div>
+            <div class="hint">Consistency builds strength.</div>
+          </button>
+          <button class="choice" data-key="creativity" role="listitem">
+            <div class="label">🎨 Creativity & Expression</div>
+            <div class="hint">Play, explore, and create.</div>
+          </button>
+        </div>
+      </section>
+
+      <!-- Quotes -->
+      <section class="quote-card" id="quoteCard" aria-live="polite" aria-atomic="true" hidden>
+        <blockquote id="quoteText">…</blockquote>
+        <div class="source" id="quoteSource"></div>
+        <div class="reflect" id="reflectPrompt"></div>
+        <div class="actions">
+          <button class="btn" id="newQuote">New quote</button>
+          <button class="btn muted" id="back">Back</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
