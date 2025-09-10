@@ -39,6 +39,7 @@ body {
   display: grid;
   place-items: center;
   min-height: 100svh;
+  transition: all 0.3s ease;
 }
 
 /* Dark Mode */
@@ -50,6 +51,7 @@ body.dark {
   --accent: #c09bf0;
   --accent-2: #7d5fbf;
   --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
 }
 
 /* App Shell */
@@ -416,3 +418,65 @@ button:hover {
     opacity: 0;
   }
 }
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .logo {
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .controls {
+    align-self: flex-end;
+  }
+
+  .intro {
+    font-size: 1rem;
+    margin: 3vh auto;
+    padding: 0 12px;
+  }
+
+  .choices {
+    grid-template-columns: 1fr; /* Stack choices vertically */
+    gap: 12px;
+  }
+
+  .choice {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+  .quote-card {
+    padding: 14px;
+    font-size: 1rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .btn, .btn-ghost {
+    width: 100%; /* Full-width buttons on mobile */
+    justify-content: center;
+  }
+}
+
+/* Slightly larger small tablets */
+@media (max-width: 850px) {
+  .choices {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+}
+
