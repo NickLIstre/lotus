@@ -61,13 +61,18 @@ const intro = document.getElementById('introMsg');
       const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
       const delay = reduced ? 700 : 3200;
       const timer = setTimeout(() => fadeToPrompt(), delay);
-      skipBtn.onclick = () => { clearTimeout(timer); fadeToPrompt(true); };
+      skipBtn.onclick = () => {
+        skipBtn.style.display = 'none';
+        clearTimeout(timer);
+        fadeToPrompt(true);
+      };
     }
 
     function fadeToPrompt(skipped=false) {
       // Hide intro
       intro.classList.add('hide');
       intro.setAttribute('aria-hidden', 'true');
+      skipBtn.style.display = 'none';
       // Show prompt after short delay unless reduced motion
       const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
       const wait = reduced || skipped ? 0 : 400;

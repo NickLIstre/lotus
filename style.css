@@ -191,6 +191,7 @@ main {
   background: transparent;
   cursor: pointer;
   font-size: 0.85rem;
+  transition: opacity var(--fade-ms) ease, transform var(--fade-ms) ease;
 }
 
 .prompt {
