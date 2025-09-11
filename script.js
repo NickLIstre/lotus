@@ -128,17 +128,32 @@ if (theme === "dark") {
 const toggle = document.createElement("button");
 toggle.id = "theme-toggle";
 toggle.textContent = theme === "dark" ? "🌙" : "☀️";
+
+// Place theme toggle in header by default
 const header = document.querySelector("header");
 header.appendChild(toggle);
+
+// Move theme toggle above question on mobile
+function moveThemeToggleMobile() {
+  const mq = window.matchMedia("(max-width: 600px)");
+  const question = document.querySelector(".question");
+  if (mq.matches && question) {
+    question.parentNode.insertBefore(toggle, question);
+    toggle.classList.add("mobile-toggle");
+  } else {
+    if (!header.contains(toggle)) header.appendChild(toggle);
+    toggle.classList.remove("mobile-toggle");
+  }
+}
+window.addEventListener("resize", moveThemeToggleMobile);
+document.addEventListener("DOMContentLoaded", moveThemeToggleMobile);
 
 toggle.addEventListener("click", () => {
   const goingDark = !document.body.classList.contains("dark");
   document.body.classList.toggle("dark");
-
   // Update icon
   toggle.textContent = document.body.classList.contains("dark") ? "🌙" : "☀️";
   localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
-
   if (goingDark) {
     for (let i = 0; i < 10; i++) {
       createShootingStar();
@@ -151,20 +166,15 @@ toggle.addEventListener("click", () => {
 function createShootingStar() {
   const star = document.createElement("div");
   star.classList.add("shooting-star");
-
   // Random starting position in the top half of screen
   star.style.top = `${Math.random() * 50}%`;
   star.style.left = `${Math.random() * 80}%`;
-
   star.style.animationDelay = `${Math.random() * 0.4}s`;
-
   const xTravel = 200 + Math.random() * 200;
   const yTravel = 100 + Math.random() * 200;
   star.style.setProperty("--xTravel", `${xTravel}px`);
   star.style.setProperty("--yTravel", `${yTravel}px`);
-
   document.body.appendChild(star);
-
   star.addEventListener("animationend", () => star.remove());
 }
 
