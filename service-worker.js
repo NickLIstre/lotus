@@ -4,8 +4,8 @@ const urlsToCache = [
   "/lotus/index.html",
   "/lotus/style.css",
   "/lotus/script.js",
-  "/lotus/icon-192.png",
-  "/lotus/icon-512.png"
+  "/lotus/icons/icon-192.png",
+  "/lotus/icons/icon-512.png"
 ];
 
 self.addEventListener("install", (event) => {
