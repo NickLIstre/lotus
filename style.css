@@ -494,3 +494,27 @@ button:hover {
   }
 }
 
+.black-baccara-logo {
+    display: flex;
+    flex-direction: column;   /* logo on top, text underneath */
+    align-items: center;
+    gap: 4px;                 /* space between logo and text */
+    font-size: 0.9rem;
+    padding: 4px 6px;
+    border-radius: 6px;
+}
+
+.black-baccara-logo-link {
+    position: fixed;          /* stays in the bottom-left corner */
+    bottom: 10px;
+    left: 10px;
+    text-decoration: none;    /* remove underline from link */
+    color: #000000;              /* text color */
+    z-index: 1000;            /* ensure it's above other content */
+}
+
+.black-baccara-logo img {
+    height: 60px;             /* adjust logo size */
+    width: auto;
+    display: block;
+}
