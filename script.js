@@ -188,6 +188,11 @@ const intro = document.getElementById('introMsg');
 
       prompt.classList.remove('show');
       quoteCard.hidden = false;
+      // Move quoteCard above prompt in DOM
+      const main = document.querySelector('main');
+      if (main && main.contains(prompt) && main.contains(quoteCard)) {
+        main.insertBefore(quoteCard, prompt);
+      }
       requestAnimationFrame(() => quoteCard.classList.add('show'));
     }
 
@@ -213,6 +218,11 @@ const intro = document.getElementById('introMsg');
       quoteCard.classList.remove('show');
       setTimeout(() => {
         quoteCard.hidden = true;
+        // Move prompt back above quoteCard in DOM
+        const main = document.querySelector('main');
+        if (main && main.contains(prompt) && main.contains(quoteCard)) {
+          main.insertBefore(prompt, quoteCard);
+        }
         prompt.classList.add('show');
       }, 180);
     });
