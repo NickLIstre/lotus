@@ -303,9 +303,8 @@ function createSunburst() {
   burst.addEventListener("animationend", () => burst.remove());
 }
 
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker
-    .register("/lotus/service-worker.js")
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/lotus/service-worker.js', { scope: '/lotus/' })
     .then(() => console.log("Service Worker registered"))
-    .catch((err) => console.log("SW registration failed: ", err));
+    .catch(err => console.error("Service Worker registration failed:", err));
 }
